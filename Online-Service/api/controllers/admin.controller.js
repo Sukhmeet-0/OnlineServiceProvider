@@ -9,9 +9,11 @@ const { ObjectId } = require("mongodb")
 const db = require("../connection")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const { verify } = require('jsonwebtoken')
+
 
 async function AddCategory(req, res) {
+
+    const [states,setStates] = useState([])
     try {
         console.log(req.body)
         const { categoryName } = req.body;
@@ -63,7 +65,7 @@ async function AdminLogin(req, res) {
             const adminCollection = db.collection('admin');
 
 
-            const user = await adminCollection.findOne({ email });
+            const user = await adminCollection.findOne({ email:email,password:password });
 
             if (!user) {
                 return res.status(400).json({ error: "Invalid Email or Password", message: "" });
@@ -101,7 +103,6 @@ async function AdminLogin(req, res) {
             return res.status(500).json({ error: error.message, message: "" });
         }
     }
-
 
 }
 async function AdminChangePassword(req, res) {

@@ -48,7 +48,8 @@ app.post('/changepassword',adminAuthorization_HTTP_Request,adminController.Admin
 
 // User api's
 app.post('/usersignup',userController.AddUser)
-app.post('/usersignup',userController.UserSIgnIn)
+app.post('/usersignin',userController.UserSIgnIn)
+
 
 
 

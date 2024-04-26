@@ -28,7 +28,7 @@ export default function AdminLogin() {
             
             <div className='container-fluid text-center text-warning '>
                 <form action="" onSubmit={handleSubmit(onSubmit)}>
-                    <h1>Admin Login  <i class="fa-solid fa-lock"></i></h1>
+                    <h1>Admin Login  <i className="fa-solid fa-lock"></i></h1>
                     <hr className='mb-5' />
                     <input className='form-control-lg' required {...register('email',{required:'This field is required'})} type="email" placeholder="enter email" />
                     <ErrorMessage

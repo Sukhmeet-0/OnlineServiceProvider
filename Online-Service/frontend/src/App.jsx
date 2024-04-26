@@ -10,6 +10,9 @@ import AdminLayout from './layouts/AdminLayout'
 import Dashboard from './pages/admin/Dashboard'
 import ChangePassword from './pages/admin/ChangePassword'
 import UserSignUp from './UserSignUp'
+import UserSignIn from './UserSignIn';
+import UserLayouts from './layouts/UserLayouts';
+import UserDashboard from './pages/users/UserDashboard';
 
 function App() {
   
@@ -21,6 +24,17 @@ function App() {
           <Route path='/category' element={<Category/>}/>
           <Route path='/adminlogin' element={<AdminLogin/>}/>
           <Route path='/usersignup' element={<UserSignUp/>}/>
+          <Route path='/usersignin' element={<UserSignIn/>}/>
+
+
+
+
+          <Route path='/user' element={<UserLayouts/>}>
+            <Route path='/userdashboard' element={<UserDashboard/>}/>
+          </Route>
+
+
+
           <Route path='/admin' element={<AdminLayout/>}>
             <Route path='dashboard' element={<Dashboard/>}/>
             <Route path='changepassword' element={<ChangePassword/>}/>

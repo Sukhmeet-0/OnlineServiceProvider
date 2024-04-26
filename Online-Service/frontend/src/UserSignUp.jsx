@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { useEffect } from 'react';
 
 
 
@@ -21,13 +22,17 @@ export default function UserSignUp() {
         })
         response = await response.json()
         console.log(response)
-        // if (response.error != '') {
-        //     alert(response.error)
-        // } else {
-        //     localStorage.setItem('adminToken', response.token)
-        //     navigate('/admin/dashboard')
-        // }
+
+    if(response.error!=""){
+        Qual.errordb('Error: ' ,response.error)
+    }else{
+        Qual.successdb('Success: ',response.message)
     }
+
+        
+    }
+    
+
     return (
         <>
             <div className='container-fluid  text-light text-center w-100'>
