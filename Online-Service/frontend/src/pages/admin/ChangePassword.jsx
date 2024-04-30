@@ -28,33 +28,33 @@ export default function ChangePassword() {
     return (
 
         <>
-            <div className='text-center text-warning container-fluid bg-dark'>
+            <div className='text-center text-warning container-fluid'>
                 <h1>Change password  <i class="fa-solid fa-key"></i></h1>
                 <hr className='mb-5'/>
                 <br />
                 <form action="" onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register('password', { required: 'This field is required' })} type="password" placeholder="current password" required className='form-control-lg'/> 
+                    <input {...register('password', { required: 'This field is required' })} type="password" placeholder="current password" required className=''/> 
                     <ErrorMessage
                             errors={errors}
                             name="password"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /> <br />
-                    <input {...register('newpassword', { required: 'This field is required' })} type="password" placeholder="new password" required className='form-control-lg'/>
+                    <input {...register('newpassword', { required: 'This field is required' })} type="password" placeholder="new password" required className=''/>
                     <ErrorMessage
                             errors={errors}
                             name="newpassword"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /> <br />
-                    <input {...register('confirmpassword', { required: 'This field is required' })} type="password" placeholder="confirm password" required className='form-control-lg'/>
+                    <input {...register('confirmpassword', { required: 'This field is required' })} type="password" placeholder="confirm password" required className=''/>
                     <ErrorMessage
                             errors={errors}
                             name="confirmpassword"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /> <br />
-                    <button className='btn btn-lg btn-outline-warning mb-3'>Change password</button>
+                    <button className=''>Change password</button>
                 </form>
             </div>
         </>

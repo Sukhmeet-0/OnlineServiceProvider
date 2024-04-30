@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { useEffect } from 'react';
+
 
 
 
@@ -35,13 +35,13 @@ export default function UserSignUp() {
 
     return (
         <>
-            <div className='container-fluid  text-light text-center w-100'>
+            <div className='container-fluid  text-light text-center'>
                 <h1 className='text-warning'>User SignUp  <i className="fa-solid fa-user-plus"></i></h1>
                 <hr className='text-warning mb-5' />
-                <div className='w-'>
-                    <form onSubmit={handleSubmit(onSubmit)}className='rounded-5 w-auto'>
+                <div className=''>
+                    <form onSubmit={handleSubmit(onSubmit)}className=''>
 
-                        <input {...register('email', { required: 'This field is required' })} type="email" className='form-control-lg form-control-sm mt-3' placeholder='Enter Email' />
+                        <input {...register('email', { required: 'This field is required' })} type="email" className='' placeholder='Enter Email' />
                         <ErrorMessage
                             errors={errors}
                             name="email"
@@ -49,7 +49,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <input {...register('password', { required: 'This field is required' })} type="password" className='form-control-lg' placeholder='Enter password' />
+                        <input {...register('password', { required: 'This field is required' })} type="password" className='' placeholder='Enter password' />
                         <ErrorMessage
                             errors={errors}
                             name="password"
@@ -60,7 +60,7 @@ export default function UserSignUp() {
 
 
 
-                        <input {...register('fullname', { required: 'This field is required' })} type="text" className='form-control-lg' placeholder='Enter fullname' /> 
+                        <input {...register('fullname', { required: 'This field is required' })} type="text" className='' placeholder='Enter fullname' /> 
 
                         <ErrorMessage
                             errors={errors}
@@ -68,7 +68,7 @@ export default function UserSignUp() {
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                         <br /><br />
-                        <input {...register('mobile', { required: 'This field is required' })} type="tel" className='form-control-lg' placeholder='Enter mobile number' />
+                        <input {...register('mobile', { required: 'This field is required' })} type="tel" className='' placeholder='Enter mobile number' />
                         <ErrorMessage
                             errors={errors}
                             name="mobile"
@@ -76,7 +76,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <select  {...register('gender', { required: 'This field is required' })} className='form-control-lg'>
+                        <select  {...register('gender', { required: 'This field is required' })} className=''>
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -89,7 +89,7 @@ export default function UserSignUp() {
 
                         <br /><br />
 
-                        <select  {...register('state', { required: 'This field is required' })} className='form-control-lg'>
+                        <select  {...register('state', { required: 'This field is required' })} className=''>
                             <option value="">Select State</option>
                             <option value="Punjab">Punjab</option>
                             <option value="Jammu">Jammu</option>
@@ -102,7 +102,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <input type="text" {...register('city', { required: 'This field is required' })} className='form-control-lg' placeholder='Enter your city' />
+                        <input type="text" {...register('city', { required: 'This field is required' })} className='' placeholder='Enter your city' />
                         <ErrorMessage
                             errors={errors}
                             name="city"
@@ -110,7 +110,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <button className='btn btn-lg btn-outline-warning mb-4 btn-hover shadow-sm'>Submit</button>
+                        <button className=''>Submit</button>
                     </form>
                 </div>
             </div>

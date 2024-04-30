@@ -50,17 +50,17 @@ function Category() {
                 <h1 className='mb-3'>Category Page  <i class="fa-solid fa-layer-group"></i></h1>
                 <hr className='mb-5' />
                 <form action="" onSubmit={handleSubmit(onSubmit)} className='bg-dark'>
-                    <input type="text" {...register('categoryName', { required: 'This field is required' })} className='form-control-lg' placeholder='Enter Category' id='categorypanel'/>
+                    <input type="text" {...register('categoryName', { required: 'This field is required' })} className='' placeholder='Enter Category' id='categorypanel'/>
                     <ErrorMessage
                             errors={errors}
                             name="categoryName"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
-                    <button className='btn btn-outline-warning btn-lg'>Add Category</button>
+                    <button className=''>Add Category</button>
                 </form>
                 <br />
 
-                <table className='table table-dark  table-striped '>
+                <table className=' '>
                     <thead >
                         <tr>
                             <th>Sr.No</th>
@@ -74,7 +74,7 @@ function Category() {
                                 <td>{index + 1}</td>
                                 <td>{value.categoryName}</td>
                                 <td>
-                                    <button type='button' className="btn btn-outline-danger" onClick={() => DeleteCategory(value._id)}>Delete</button>
+                                    <button type='button' className="" onClick={() => DeleteCategory(value._id)}>Delete</button>
                                 </td>
                             </tr>
 

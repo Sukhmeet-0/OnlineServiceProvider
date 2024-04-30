@@ -13,6 +13,7 @@ import UserSignUp from './UserSignUp'
 import UserSignIn from './UserSignIn';
 import UserLayouts from './layouts/UserLayouts';
 import UserDashboard from './pages/users/UserDashboard';
+import Home from './pages/Home';
 
 function App() {
   
@@ -25,7 +26,7 @@ function App() {
           <Route path='/adminlogin' element={<AdminLogin/>}/>
           <Route path='/usersignup' element={<UserSignUp/>}/>
           <Route path='/usersignin' element={<UserSignIn/>}/>
-
+          <Route path='/' element={<Home/>}/>
 
 
 
