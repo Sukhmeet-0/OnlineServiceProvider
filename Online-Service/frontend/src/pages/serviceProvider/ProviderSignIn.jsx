@@ -6,7 +6,7 @@ export default function ProviderSignIn(){
     return(
         <>
             <div className="container-fluid text-center">
-                <h1 className="mt-3">Provider Sign In </h1>
+                <h1 className="mt-3">Provider Sign In  <i className="fa-solid fa-lock"></i></h1>
                 <hr className="mt-4" />
                 <form >
                     <div className="grid grid-cols-1">
