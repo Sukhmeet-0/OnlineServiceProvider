@@ -43,6 +43,8 @@ app.post('/category',adminController.AddCategory)
 app.delete('/category/:_id',adminController.DeleteCategory)
 app.post('/adminlogin',adminController.AdminLogin)
 app.post('/changepassword',adminAuthorization_HTTP_Request,adminController.AdminChangePassword)
+app.post('/subcategory',adminController.SubCategory)
+app.delete('/subcategory/:_id',adminController.DeleteSubCategory)
 
 
 

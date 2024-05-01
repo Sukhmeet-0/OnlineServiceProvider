@@ -5,6 +5,7 @@
 // const item = {id:1,CategoryName:'Computer technician'}
 // const result = await collection.insertMany(item)
 
+
 const { ObjectId } = require("mongodb")
 const db = require("../connection")
 const jwt = require('jsonwebtoken')
@@ -13,7 +14,7 @@ const bcrypt = require('bcryptjs')
 
 async function AddCategory(req, res) {
 
-    const [states,setStates] = useState([])
+    
     try {
         console.log(req.body)
         const { categoryName } = req.body;
@@ -138,7 +139,44 @@ async function AdminChangePassword(req, res) {
     }
     // res.json({error:'',message:''})
 }
+async function SubCategory(req, res) {
+    try {
+        const { categoryName, subCategory } = req.body;
+        const category = await db.collection('category').findOne({ categoryName: categoryName });
 
+        if (!category) {
+            return res.status(404).json({ error: 'Category not found', message: '' });
+        }
+
+        let subCategories = category.subCategory || [];
+        subCategories.push({ name: subCategory });
+        await db.collection('category').updateOne(
+            { categoryName: categoryName },
+            { $set: { subCategory: subCategories } }
+        );
+
+        res.json({ error: '', message: 'Subcategory added successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message, message: '' });
+    }
+}
+
+
+async function DeleteSubCategory(req, res) {
+    try {
+        let { _id, categoryName, subCategoryName } = req.params;
+        let updateData = {
+            categoryName: categoryName,
+            $pull: { subCategory: { name: subCategoryName } }
+        };
+        let collection = "category";
+        let filter = { _id: new ObjectId(_id), categoryName: categoryName };
+        let result = await db.collection(collection).updateOne(filter, updateData);
+        res.json({ error: '', message: 'Category Deleted.' });
+    } catch (e) {
+        res.json({ error: e.message, message: '' });
+    }
+}
 
 module.exports = {
     AddCategory,
@@ -146,6 +184,7 @@ module.exports = {
     DeleteCategory,
     AdminLogin,
     AdminChangePassword,
-   
+   SubCategory,
+   DeleteSubCategory,
 
 }

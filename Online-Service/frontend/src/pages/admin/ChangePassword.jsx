@@ -33,28 +33,28 @@ export default function ChangePassword() {
                 <hr className='mb-5'/>
                 <br />
                 <form action="" onSubmit={handleSubmit(onSubmit)}>
-                    <input {...register('password', { required: 'This field is required' })} type="password" placeholder="current password" required className=''/> 
+                    <input className="shadow appearance-none border rounded w-full px-2 py-2" {...register('password', { required: 'This field is required' })} type="password" placeholder="current password" required /> 
                     <ErrorMessage
                             errors={errors}
                             name="password"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /> <br />
-                    <input {...register('newpassword', { required: 'This field is required' })} type="password" placeholder="new password" required className=''/>
+                    <input className="shadow appearance-none border rounded w-full px-2 py-2" {...register('newpassword', { required: 'This field is required' })} type="password" placeholder="new password" required />
                     <ErrorMessage
                             errors={errors}
                             name="newpassword"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /> <br />
-                    <input {...register('confirmpassword', { required: 'This field is required' })} type="password" placeholder="confirm password" required className=''/>
+                    <input className="shadow appearance-none border rounded w-full px-2 py-2" {...register('confirmpassword', { required: 'This field is required' })} type="password" placeholder="confirm password" required />
                     <ErrorMessage
                             errors={errors}
                             name="confirmpassword"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /> <br />
-                    <button className=''>Change password</button>
+                    <button className='btn btn-outline-warning'>Change password</button>
                 </form>
             </div>
         </>

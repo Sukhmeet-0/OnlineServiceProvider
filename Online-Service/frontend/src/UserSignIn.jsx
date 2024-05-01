@@ -32,7 +32,7 @@ export default function UserSignIn(){
                 <h1 className='mt-3'>User SignIn  <i className="fa-solid fa-right-to-bracket"></i></h1>
                 <hr className='mb-5'/>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                <input {...register('email',{required:'This field is required'})} type="email" placeholder='Enter email' className='' />
+                <input {...register('email',{required:'This field is required'})} type="email" placeholder='Enter email' className='shadow appearance-none border rounded w-full px-2 py-2' />
                 <ErrorMessage
                             errors={errors}
                             name="email"
@@ -41,7 +41,7 @@ export default function UserSignIn(){
                 <br />
                 <br />
 
-                <input {...register('password',{required:'This field is required'})} type="password" placeholder='Enter password' className='' />
+                <input {...register('password',{required:'This field is required'})} type="password" placeholder='Enter password' className='shadow appearance-none border rounded w-full px-2 py-2' />
                 <ErrorMessage
                             errors={errors}
                             name="password"
@@ -50,7 +50,7 @@ export default function UserSignIn(){
                 <br />
                 <br />
 
-                <button className=''>LogIn</button>
+                <button className='btn btn-outline-warning'>LogIn</button>
                 </form>
 
             </div>

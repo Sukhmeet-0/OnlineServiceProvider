@@ -26,32 +26,32 @@ export default function AdminLogin() {
     return (
         <>
             
-            <div className=''>
+            <div className='text-center'>
                 <form action="" onSubmit={handleSubmit(onSubmit)}>
                     <h1>Admin Login  <i className="fa-solid fa-lock"></i></h1>
                     <hr className='mb-5' />
-                    <input className='' required {...register('email',{required:'This field is required'})} type="email" placeholder="enter email" />
+                    <input className='shadow appearance-none border rounded w-full px-2 py-2' required {...register('email',{required:'This field is required'})} type="email" placeholder="enter email" />
                     <ErrorMessage
                             errors={errors}
                             name="email"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /><br />
-                    <input className='' required {...register('password',{required:'This field is required'})} type="password" placeholder="enter password" />
+                    <input className='shadow appearance-none border rounded w-full px-2 py-2' required {...register('password',{required:'This field is required'})} type="password" placeholder="enter password" />
                     <ErrorMessage
                             errors={errors}
                             name="password"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /><br />
-                    <input className='' required {...register('fullname',{required:'This field is required'})} type="text" placeholder="enter fullname" />
+                    <input className='shadow appearance-none border rounded w-full px-2 py-2' required {...register('fullname',{required:'This field is required'})} type="text" placeholder="enter fullname" />
                     <ErrorMessage
                             errors={errors}
                             name="fullname"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                     <br /><br />
-                    <button className=''>Login</button>
+                    <button className='btn btn-outline-warning '>Login</button>
                 </form>
             </div>
         </>

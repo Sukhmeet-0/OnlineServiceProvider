@@ -41,7 +41,7 @@ export default function UserSignUp() {
                 <div className=''>
                     <form onSubmit={handleSubmit(onSubmit)}className=''>
 
-                        <input {...register('email', { required: 'This field is required' })} type="email" className='' placeholder='Enter Email' />
+                        <input {...register('email', { required: 'This field is required' })} type="email" className='shadow appearance-none border rounded w-full px-2 py-2' placeholder='Enter Email' />
                         <ErrorMessage
                             errors={errors}
                             name="email"
@@ -49,7 +49,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <input {...register('password', { required: 'This field is required' })} type="password" className='' placeholder='Enter password' />
+                        <input {...register('password', { required: 'This field is required' })} type="password" className='shadow appearance-none border rounded w-full px-2 py-2' placeholder='Enter password' />
                         <ErrorMessage
                             errors={errors}
                             name="password"
@@ -60,7 +60,7 @@ export default function UserSignUp() {
 
 
 
-                        <input {...register('fullname', { required: 'This field is required' })} type="text" className='' placeholder='Enter fullname' /> 
+                        <input {...register('fullname', { required: 'This field is required' })} type="text" className='shadow appearance-none border rounded w-full px-2 py-2' placeholder='Enter fullname' /> 
 
                         <ErrorMessage
                             errors={errors}
@@ -68,7 +68,7 @@ export default function UserSignUp() {
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
                         <br /><br />
-                        <input {...register('mobile', { required: 'This field is required' })} type="tel" className='' placeholder='Enter mobile number' />
+                        <input {...register('mobile', { required: 'This field is required' })} type="tel" className='shadow appearance-none border rounded w-full px-2 py-2' placeholder='Enter mobile number' />
                         <ErrorMessage
                             errors={errors}
                             name="mobile"
@@ -76,7 +76,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <select  {...register('gender', { required: 'This field is required' })} className=''>
+                        <select  {...register('gender', { required: 'This field is required' })} className='shadow appearance-none border rounded w-full px-2 py-2'>
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -89,7 +89,7 @@ export default function UserSignUp() {
 
                         <br /><br />
 
-                        <select  {...register('state', { required: 'This field is required' })} className=''>
+                        <select  {...register('state', { required: 'This field is required' })} className='shadow appearance-none border rounded w-full px-2 py-2'>
                             <option value="">Select State</option>
                             <option value="Punjab">Punjab</option>
                             <option value="Jammu">Jammu</option>
@@ -102,7 +102,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <input type="text" {...register('city', { required: 'This field is required' })} className='' placeholder='Enter your city' />
+                        <input type="text" {...register('city', { required: 'This field is required' })} className='shadow appearance-none border rounded w-full px-2 py-2' placeholder='Enter your city' />
                         <ErrorMessage
                             errors={errors}
                             name="city"
@@ -110,7 +110,7 @@ export default function UserSignUp() {
                         />
                         <br /><br />
 
-                        <button className=''>Submit</button>
+                        <button className='btn btn-outline-warning'>Submit</button>
                     </form>
                 </div>
             </div>

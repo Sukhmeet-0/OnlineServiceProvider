@@ -14,6 +14,8 @@ import UserSignIn from './UserSignIn';
 import UserLayouts from './layouts/UserLayouts';
 import UserDashboard from './pages/users/UserDashboard';
 import Home from './pages/Home';
+import Subcategory from './pages/admin/SubCategory'
+import ProviderSignUp from './pages/serviceProvider/ProviderSignUp'
 
 function App() {
   
@@ -23,10 +25,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/category' element={<Category/>}/>
+          <Route path='/subcategory' element={<Subcategory/>}/>
           <Route path='/adminlogin' element={<AdminLogin/>}/>
           <Route path='/usersignup' element={<UserSignUp/>}/>
           <Route path='/usersignin' element={<UserSignIn/>}/>
           <Route path='/' element={<Home/>}/>
+          <Route path='/providersignup' element={<ProviderSignUp/>}/>
 
 
 
