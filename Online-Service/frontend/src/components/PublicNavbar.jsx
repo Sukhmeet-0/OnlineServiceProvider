@@ -22,11 +22,14 @@ export default function PublicNavbar() {
                     <Link to="/" className='text-decoration-none text-warning mx-2 sm:mx-1'>
                         Contact
                     </Link>
-                    <Link to="/usersignin" className='text-decoration-none text-warning mx-2 sm:mx-1'>
-                        SignIn
+                    <Link to="/user" className='text-decoration-none text-warning mx-2 sm:mx-1'>
+                        User
                     </Link>
-                    <Link to="/usersignup" className='text-decoration-none text-warning mx-2 sm:mx-1'>
-                        SignUp
+                    <Link to="/provider" className='text-decoration-none text-warning mx-2 sm:mx-1'>
+                        Provider
+                    </Link>
+                    <Link to="/adminlogin" className='text-decoration-none text-warning mx-2 sm:mx-1'>
+                        Admin
                     </Link>
                 </div>
             </div>

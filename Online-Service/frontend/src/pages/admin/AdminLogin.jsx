@@ -1,6 +1,7 @@
 import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { ErrorMessage } from '@hookform/error-message'
+import Footer from '../../components/Footer'
 export default function AdminLogin() {
     const navigate = useNavigate()
     const {register,handleSubmit, formState:{errors}} = useForm()
@@ -26,7 +27,7 @@ export default function AdminLogin() {
     return (
         <>
             
-            <div className='text-center'>
+            <div className='text-center bg-black text-warning pb-4'>
                 <form action="" onSubmit={handleSubmit(onSubmit)}>
                     <h1>Admin Login  <i className="fa-solid fa-lock"></i></h1>
                     <hr className='mb-5' />
@@ -54,6 +55,8 @@ export default function AdminLogin() {
                     <button className='btn btn-outline-warning '>Login</button>
                 </form>
             </div>
+            <hr className='text-warning mt-5'/>
+            <Footer/>
         </>
     )
 }

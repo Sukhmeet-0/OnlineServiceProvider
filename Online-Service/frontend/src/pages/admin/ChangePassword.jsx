@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { ErrorMessage } from '@hookform/error-message'
+import Footer from '../../components/Footer'
 export default function ChangePassword() {
 
     let navigate = useNavigate()
@@ -57,6 +58,7 @@ export default function ChangePassword() {
                     <button className='btn btn-outline-warning'>Change password</button>
                 </form>
             </div>
+            <hr  className='text-warning'/>
         </>
     )
 }

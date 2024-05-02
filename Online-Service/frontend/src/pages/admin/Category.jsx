@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
+import Footer from '../../components/Footer';
 
 
 function Category() {
@@ -49,7 +50,7 @@ function Category() {
             <div className="container-fluid  text-warning text-center ">
                 <h1 className='mb-3'>Category Page  <i className="fa-solid fa-layer-group"></i></h1>
                 <hr className='mb-5' />
-                <form action="" onSubmit={handleSubmit(onSubmit)} className='bg-dark'>
+                <form action="" onSubmit={handleSubmit(onSubmit)} >
                     <input type="text" {...register('categoryName', { required: 'This field is required' })} className='shadow appearance-none border rounded w-full px-2 py-2' placeholder='Enter Category' id='categorypanel' />
                     <ErrorMessage
                         errors={errors}
@@ -82,6 +83,8 @@ function Category() {
                     </tbody>
                 </table>
             </div>
+            <hr  className='text-warning'/>
+            <Footer/>
         </>
     )
 } export default Category

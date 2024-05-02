@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react';
 import { ErrorMessage } from '@hookform/error-message';
-
+import Footer from '../../components/Footer'
 
 export default function SubCategory() {
 
     let [category, setCategory] = useState([])
 
-    let { register, handleSubmit,formState:{errorscd} } = useForm()
+    let { register, handleSubmit,formState:{errors} } = useForm()
 
     async function DeleteCategory(_id) {
         console.log(_id)
@@ -117,6 +117,8 @@ export default function SubCategory() {
 
                 </table>
             </div>
+            <hr className='text-warning'/>
+            <Footer/>
         </>
     )
 

@@ -35,8 +35,8 @@ export default function UserSignUp() {
 
     return (
         <>
-            <div className='container-fluid  text-light text-center'>
-                <h1 className='text-warning'>User SignUp  <i className="fa-solid fa-user-plus"></i></h1>
+            <div className='container-fluid  text-warning text-center bg-black pb-4'>
+                <h1 >User SignUp  <i className="fa-solid fa-user-plus"></i></h1>
                 <hr className='text-warning mb-5' />
                 <div className=''>
                     <form onSubmit={handleSubmit(onSubmit)}className=''>

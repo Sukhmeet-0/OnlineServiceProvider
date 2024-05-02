@@ -1,12 +1,13 @@
 import {useForm} from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
+import Footer from '../../components/Footer'
 
 export default function ProviderSignIn(){
     const{register,handleSubmit,formState:{errors}}=useForm()
     return(
         <>
-            <div className="container-fluid text-center">
-                <h1 className="mt-3">Provider Sign In  <i className="fa-solid fa-lock"></i></h1>
+            <div className="container-fluid text-center bg-black text-warning pb-4">
+                <h1 className="pt-3">Provider Sign In  <i className="fa-solid fa-lock"></i></h1>
                 <hr className="mt-4" />
                 <form >
                     <div className="grid grid-cols-1">
@@ -29,6 +30,8 @@ export default function ProviderSignIn(){
                 </form>
 
             </div>
+            <hr className='text-warning'/>
+            <Footer/>
         </>
     )
 }

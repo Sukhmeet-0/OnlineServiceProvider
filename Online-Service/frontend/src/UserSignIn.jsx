@@ -28,8 +28,8 @@ export default function UserSignIn(){
 
     return (
         <>
-            <div className="text-warning text-center">
-                <h1 className='mt-3'>User SignIn  <i className="fa-solid fa-right-to-bracket"></i></h1>
+            <div className="text-warning text-center bg-black pb-4">
+                <h1 className='pt-3'>User SignIn  <i className="fa-solid fa-right-to-bracket"></i></h1>
                 <hr className='mb-5'/>
                 <form onSubmit={handleSubmit(onSubmit)}>
                 <input {...register('email',{required:'This field is required'})} type="email" placeholder='Enter email' className='shadow appearance-none border rounded w-full px-2 py-2' />
