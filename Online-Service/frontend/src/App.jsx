@@ -17,6 +17,8 @@ import Home from './pages/Home';
 import Subcategory from './pages/admin/SubCategory'
 import ProviderSignUp from './pages/serviceProvider/ProviderSignUp'
 import ProviderSignIn from './pages/serviceProvider/ProviderSignIn';
+import Contact from './pages/Contact';
+import About from './pages/About';
 
 function App() {
   
@@ -33,6 +35,8 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/providersignup' element={<ProviderSignUp/>}/>
           <Route path='/providersignin' element={<ProviderSignIn/>}/>
+          <Route path='/contact' element={<Contact/>}/>
+          <Route path='/about' element={<About/>}/>
 
 
 
