@@ -45,12 +45,18 @@ app.post('/adminlogin',adminController.AdminLogin)
 app.post('/changepassword',adminAuthorization_HTTP_Request,adminController.AdminChangePassword)
 app.post('/subcategory',adminController.SubCategory)
 app.delete('/subcategory/:_id',adminController.DeleteSubCategory)
+app.get('/subcategory/:categoryName',adminController.ReadSubCategory)
 
 
 
 // User api's
 app.post('/usersignup',userController.AddUser)
 app.post('/usersignin',userController.UserSIgnIn)
+
+
+//provider api's
+app.post('/providersignup',userController.AddProvider)
+app.post('/providersignin',userController.ProviderSignIn)
 
 
 
