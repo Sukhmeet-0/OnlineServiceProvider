@@ -185,8 +185,12 @@ async function ReadSubCategory(req,res){
         const category = await db.collection('category').findOne({ categoryName: categoryName });
         if (!category) {
             return res.status(404).json({ error: "Category not found", subCategory: [] });
+        }else if(category.subCategory){
+
+            res.json({ subCategory: category.subCategory});
+        }else{
+            res.json({ subCategory: []});
         }
-        res.json({ subCategory: category.subCategory});
     } catch (error) {
         console.error("Error fetching subcategories:", error);
         res.status(500).json({ error: "Internal server error" });

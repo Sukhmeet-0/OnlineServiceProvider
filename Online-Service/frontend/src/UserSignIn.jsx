@@ -20,7 +20,7 @@ export default function UserSignIn(){
             Qual.errordb('Error: ' ,response.error)
         }else{
 
-            Qual.successdb('Success: ',response.message)
+            // Qual.successdb('Success: ',response.message)
             localStorage.setItem('userToken',response.token)
             navigate('/user/dashboard')
         }

@@ -80,31 +80,32 @@ export default function ProviderSignUp() {
                             name="fullname"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
+                        <br />
 
                         <input {...register('email', { required: "This field is required" })} type="email" placeholder="Enter email" className="" />
                         <ErrorMessage
                             errors={errors}
                             name="email"
                             render={({ message }) => <p className='error-message'>{message}</p>}
-                        />
+                        /> <br />
                         <input {...register('password', { required: "This field is required" })} type="password" placeholder="Enter password" className="" />
                         <ErrorMessage
                             errors={errors}
                             name="password"
                             render={({ message }) => <p className='error-message'>{message}</p>}
-                        />
-                        <input {...register('confirmpassword', { required: "This field is required" })} type="password" placeholder="Confirm password" className="" />
+                        /> <br />
+                        {/* <input {...register('confirmpassword', { required: "This field is required" })} type="password" placeholder="Confirm password" className="" />
                         <ErrorMessage
                             errors={errors}
                             name="confirmpassword"
                             render={({ message }) => <p className='error-message'>{message}</p>}
-                        />
+                        /> <br /> */}
                         <input {...register('phone', { required: "This field is required" })} type="tel" placeholder="Enter phone number" className="" />
                         <ErrorMessage
                             errors={errors}
                             name="phone"
                             render={({ message }) => <p className='error-message'>{message}</p>}
-                        />
+                        /> <br />
                         <select {...register('city', { required: "This field is required" })} className="">
                             <option value="">Select City</option>
                             <option value="Amritsar">Amritsar </option>
@@ -117,6 +118,7 @@ export default function ProviderSignUp() {
                             name="city"
                             render={({ message }) => <p className='error-message'>{message}</p>}
                         />
+                        <br />
                         <textarea {...register('address',{required:"This field is required"})}  id="" cols="47" rows="3" className="" placeholder="Enter your address..."></textarea>
                         <ErrorMessage
                             errors={errors}
@@ -129,6 +131,7 @@ export default function ProviderSignUp() {
                             errors={errors}
                             name="starttime"
                             render={({ message }) => <p className='error-message'>{message}</p>} />
+                            <br />
 
                         <label htmlFor="endtime">End Time: </label>
                         <input {...register('endtime', { required: "This field is required" })} type="time" className="" placeholder="" />
@@ -136,18 +139,21 @@ export default function ProviderSignUp() {
                             errors={errors}
                             name="endtime"
                             render={({ message }) => <p className='error-message'>{message}</p>} />
+                            <br />
 
                         <input {...register('slot', { required: "This field is required" })} type="text" placeholder="Enter price per hour" className="" />
                         <ErrorMessage
                             errors={errors}
                             name="slot"
                             render={({ message }) => <p className='error-message'>{message}</p>} />
+                            <br />
 
                         <input {...register('photo', { required: "This field is required" })} type="file" className=" " />
                         <ErrorMessage
                             errors={errors}
                             name="photo"
                             render={({ message }) => <p className='error-message'>{message}</p>} />
+                            <br />
 
                         <select {...register('categoryName', { required: "This field is required" })} className="" onChange={handleCategoryChange}>
                             <option value="">Select Category</option>
@@ -160,6 +166,7 @@ export default function ProviderSignUp() {
                             errors={errors}
                             name="categoryName"
                             render={({ message }) => <p className='error-message'>{message}</p>} />
+                            <br />
 
                        <select {...register('subCategory', { required: "This field is required" })} className="">
                             <option value="">Select SubCategory</option>
