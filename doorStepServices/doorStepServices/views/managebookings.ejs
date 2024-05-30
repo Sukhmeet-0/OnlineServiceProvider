@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Document Title -->
+    <title>Serviney</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Rubik:400,500,700%7CSource+Sans+Pro:300i,400,400i,600,700">
+    <link rel="stylesheet" href="/assets2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets2/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets2/plugins/swiper/swiper.min.css">
+    <link rel="stylesheet" href="/assets2/plugins/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="/assets2/plugins/color-switcher/color-switcher.css">
+    <link rel="stylesheet" href="/assets2/css/style.css">
+    <link rel="stylesheet" href="/assets2/css/responsive.css">
+    <link rel="stylesheet" href="/assets2/css/colors/theme-color-1.css">
+    <link rel="stylesheet" href="/assets2/css/custom.css">
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        var arr = "";
+        var pr = "";
+        var email = "";
+
+        function go() {
+//                alert("hello");
+            var date = document.getElementById("date").value;
+            var email1 = localStorage.getItem("email");
+            email = email1;
+//              alert(date);
+            var xhttp = new XMLHttpRequest();
+            var form = new FormData();
+            form.append("email", email1);
+            form.append("date", date);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    console.log(res);
+                    var mainobj = JSON.parse(res);
+                    console.log(mainobj);
+                    arr = mainobj["ans"];
+                    console.log(arr);
+                    pr = mainobj["price_per_hrs"];
+                    var ans = "";
+                    ans = ans + "<table class=\"table table-hover mt-3\"> ";
+                    ans = ans + "<tr>";
+                    ans = ans + "<th>Select</th>";
+                    ans = ans + "<th>Start_Time</th>";
+                    ans = ans + " <th>End_Time</th>";
+                    ans = ans + " <th>Status</th>";
+                    ans = ans + "</tr>";
+                    var price = parseInt(pr);
+
+                    for (var i = 0; i < arr.length; i++) {
+
+
+                        var start_time = arr[i]["start_hrs"];
+                        var end_time = arr[i]["end_hrs"];
+                        var status = arr[i]["status"];
+
+
+                        ans = ans + "<tr>";
+                        if (status === "booked") {
+                            ans = ans + "<td> <div class=\"checkbox\"> <label><input type=\"checkbox\" disabled name=\"choice\" id='cb" + i + "' value=" + start_time + " onchange=\"checkTotal()\"></label></div> </td>";
+                        } else {
+                            ans = ans + "<td> <div class=\"checkbox\"> <label><input type=\"checkbox\" name=\"choice\" id='cb" + i + "' value=" + start_time + " onchange=\"checkTotal()\"></label></div> </td>";
+                        }
+
+
+                        ans = ans + "<td>" + start_time + "</td>";
+                        ans = ans + "<td>" + end_time + "</td>";
+                        if (status === "booked") {
+                            ans = ans + "<td style='background-color: red; color: white'>" + status + "</td>";
+                        } else {
+                            ans = ans + "<td style='background-color: green; color: white'>" + status + "</td>";
+                        }
+
+                        ans = ans + "</tr>";
+
+                    }
+
+                    ans = ans + "</table>";
+                    ans = ans + "<div class=\"form-group\">";
+                    ans = ans + "<label for=\"total\">Total</label>";
+                    ans = ans + " <input type=\"text\" class=\"form-control\" id=\"totalans\" disabled name=\"total\" value=\"0\"/>";
+                    ans = ans + "</div>";
+                    ans += "<div class = 'form-group'>";
+                    ans += "<div class = 'row'>";
+                    ans += "<div class= \"col-sm-12\">";
+                    ans += '<input type="button" id="btn7" value="Pay Now" class="btn btn-success" onclick="payment_method1()"/><br>';
+                    ans += "</div>";
+                    ans += "</div>";
+                    ans += "</div>";
+                    //document.getElementById("d1").innerHTML = res;
+                    document.getElementById("d1").innerHTML = ans;
+                    document.getElementById("bt1").className = "btn btn-primary";
+                    document.getElementById("st").innerHTML = "status: " + status;
+                    document.getElementById("price").innerHTML = "price: " + price;
+                }
+            };
+
+            xhttp.open("POST", "/fetchbookingdetails", true);
+            xhttp.send(form);
+        }
+
+        var timeslots = [];
+
+        function payment_method(status) {
+            var date = document.getElementById("date").value;
+            var Status = status;
+//                alert(Status);
+            for (var i = 0; i < arr.length; i++) {
+                if (document.getElementById("cb" + i).checked) {
+                    timeslots.push(document.getElementById("cb" + i).value);
+                }
+            }
+
+            var slots = timeslots.join(",");
+            var price = total;
+            var xhttp = new XMLHttpRequest();
+            var form = new FormData();
+            form.append("date", date);
+//                      form.append("useremail","nirbhay@gmail.com");
+            form.append("email", email);
+            form.append("status", status);
+            form.append("price", price);
+            form.append("slots", timeslots);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    var res = this.responseText;
+//                        alert(res);
+                    if (res === "success") {
+                        window.location.href = "/payment_success";
+                    }
+                }
+            };
+
+            xhttp.open("POST", "/booking", true);
+            xhttp.send(form);
+
+
+        }
+
+        function payment_method1() {
+            var options = {
+//                  rzp_live_6R4RfSxoYaN6a7
+//rzp_test_96HeaVmgRvbrfT
+
+                "key": "rzp_test_96HeaVmgRvbrfT", // Enter the Key ID generated from the Dashboard
+                "amount": total * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
+                "currency": "INR",
+                "name": "Door Step",
+                "description": "Door Step",
+                "image": "https://example.com/your_logo",
+                "handler": function (response) {
+//                    alert(response);
+//                    alert(response.razorpay_payment_id );          
+                    payment_method("online");
+                },
+                "prefill": {
+                    "name": "test", "email": "test24pro@gmail.com",
+                    "contact": ""
+                },
+                "notes": {
+                    "address": ""
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            document.getElementById('btn7').onclick = function (e) {
+                rzp1.open();
+                e.preventDefault();
+            }
+//                 var date= document.getElementById("date").value;
+//                var Status = status;
+//                alert(Status);
+//                 for (var i =parseInt(0); i < parseInt(arr.length); i++)
+//                {
+//                    if (document.getElementById("cb" + i).checked)
+//                    {
+//                        timeslots += document.getElementById("cb" + i).value + ",";
+////                        alert(document.getElementById("cb"+i).value+" "+("cb"+i));
+////                        alert(timeslots);
+//                    }
+//                }
+//                
+//                var slots = timeslots;
+//                var price = total;
+//                      var xhttp = new XMLHttpRequest();
+//                
+//                xhttp.onreadystatechange = function () 
+//                {
+//                    if (this.readyState == 4 && this.status == 200) 
+//                    {
+//            
+//                        var res = this.responseText;
+//                        alert(res);
+//                    }
+//                };
+//                
+//        xhttp.open("GET", "../booking?date="+date+"&useremail=&venderemail=&status="+status+"&price="+price+"&slots="+slots, true);
+//                xhttp.send();
+//                
+//                      return true;
+        }
+
+        function disable(status) {
+            for (var i = parseInt(0); i < parseInt(arr.length); i++) {
+                if (status == 'booked') {
+                    document.getElementById("cb" + i).disabled = true;
+                } else {
+                    document.getElementById("cb" + i).disabled = false;
+                }
+            }
+        }
+
+        function checkTotal() {
+
+//		document.listForm.total.value = '';
+            var count = 0;
+            var a = document.getElementsByName("choice");
+//                var price = parseInt(document.getElementById("price").value);
+            var price1 = parseInt(pr);
+            console.log(price1);
+            for (var i = 0; i < a.length; i++) {
+
+                if (a[i].checked) {
+                    count++;
+
+
+                }
+            }
+
+            total = count * price1;
+
+//		document.listForm.total.value = total;
+            document.getElementById("totalans").value = total;
+        }
+    </script>
+</head>
+
+<body>
+
+<!-- Main header -->
+<header class="header">
+
+    <div class="header-top" data-animate="fadeInDown" data-delay=".5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header-info text-center text-md-left">
+                        <span>Door Step Services<a href="#">Get It Now</a></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-header" data-animate="fadeInUp" data-delay=".9">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-9">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/">
+                            <img src="/assets2/img/logo.png" data-rjs="2" alt="VPNet">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-8 col-md-5 col-sm-2 col-3">
+                    <nav>
+                        <!-- Header-menu -->
+                        <div class="header-menu">
+                            <ul>
+                                <li class="active"><a href="/user_home">Home</a></li>
+                                <li class=""><a href="/user_bookings">Bookings</a></li>
+                                <li class=""><a href="/">Logout</a></li>
+                            </ul>
+                        </div>
+                        <!-- End of Header-menu -->
+                    </nav>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 d-none d-sm-block">
+                    <!-- Header Call -->
+                    <div class="header-call text-right">
+                        <span>Call Now</span>
+                        <a href="tel:+1234567890">(+1) 234-567-8900</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End of Main header -->
+
+
+<section class="page-title-wrap" data-bg-img="img/hills.jpg" data-rjs="2">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-title" data-animate="fadeInUp">
+                    <h2>Book Vendor</h2>
+                    <ul class="list-unstyled m-0 d-flex">
+                        <li><a href="user_home"><i class="fa fa-home"></i> Home</a></li>
+                        <li><a href="#">Book Vendor</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<main id="main" class="my-3">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+        <div class="container">
+            <form name="listForm">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" class="form-control" placeholder="Enter Username" id="date">
+                </div>
+
+                <input type="button" id="bt1" value="fetch details" class="btn btn-warning" onclick="go()"/>
+                <br>
+            </form>
+
+            <div id="d1">
+
+            </div>
+        </div>
+
+    </section>
+
+</main><!-- End #main -->
+
+<footer class="main-footer">
+
+
+    <div class="bottom-footer dark-bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Copyright -->
+                <div class="col-md-6">
+                    <div class="copyright-text text-center text-md-left">
+                        <p class="mb-md-0">&copy; 2018 Serviney. All rights reserved.</p>
+                    </div>
+                </div>
+
+                <!-- Social Profiles -->
+                <div class="col-md-6">
+                    <ul class="social-profiles nav justify-content-center justify-content-md-end">
+                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-vimeo"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- JS Files -->
+<script src="/assets2/js/jquery-3.3.1.min.js"></script>
+<script src="/assets2/js/bootstrap.bundle.min.js"></script>
+<script src="/assets2/plugins/waypoints/jquery.waypoints.min.js"></script>
+<script src="/assets2/plugins/waypoints/sticky.min.js"></script>
+<script src="/assets2/plugins/swiper/swiper.min.js"></script>
+<script src="/assets2/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/assets2/plugins/parsley/parsley.min.js"></script>
+<script src="/assets2/plugins/color-switcher/color-switcher.js"></script>
+<script src="/assets2/plugins/retinajs/retina.min.js"></script>
+<script src="/assets2/plugins/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets2/js/menu.min.js"></script>
+<script src="/assets2/js/scripts.js"></script>
+<script src="/assets2/js/custom.js"></script>
+
+</body>
+
+</html>

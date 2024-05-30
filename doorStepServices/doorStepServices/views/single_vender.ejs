@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Document Title -->
+    <title>Serviney</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Rubik:400,500,700%7CSource+Sans+Pro:300i,400,400i,600,700">
+    <link rel="stylesheet" href="/assets2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets2/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets2/plugins/swiper/swiper.min.css">
+    <link rel="stylesheet" href="/assets2/plugins/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" href="/assets2/plugins/color-switcher/color-switcher.css">
+    <link rel="stylesheet" href="/assets2/css/style.css">
+    <link rel="stylesheet" href="/assets2/css/responsive.css">
+    <link rel="stylesheet" href="/assets2/css/colors/theme-color-1.css">
+    <link rel="stylesheet" href="/assets2/css/custom.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+
+        .rate:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+        }
+
+        .rate:not(:checked) > label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
+
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
+
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
+
+        /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+    </style>
+    <script>
+        function fetch_venders() {
+            var email = localStorage.getItem("email");
+//                alert(email);
+            var xhttp = new XMLHttpRequest();
+            var form = new FormData();
+            form.append("email", email);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.response;
+                    console.log(res);
+
+                    var mainobj = JSON.parse(res);
+                    console.log(mainobj);
+
+                    var arr = mainobj["ans"];
+                    console.log(arr);
+
+                    var ans = "";
+                    var bt = "";
+                    for (var i = 0; i < arr.length; i++) {
+                        var name = arr[i]["name"];
+                        var email = arr[i]["email"];
+                        var phone = arr[i]["phone"];
+                        var website = arr[i]["website"];
+                        var city = arr[i]["city"];
+                        var price_per_hrs = arr[i]["price_per_hrs"];
+                        var start_time = arr[i]["start_hrs"];
+                        var end_time = arr[i]["end_hrs"];
+                        var address = arr[i]["address"];
+                        var photo = arr[i]["photo"];
+//                          ans = ans+"<div class=\"col-md-6 col-sm-6 col-xs-12\">";
+//      ans = ans+"<div class=\"single-service\">";
+//     ans = ans+"<a class=\"service-image\" href=\"#\">";
+//     ans = ans+"<img src="+photo+">";
+//     ans = ans+"</a>";
+//     ans = ans+"<div class=\"service-content\">";
+//     ans = ans + "<h4>"+name+"</strong></h4>";
+//     ans = ans +" <p>"+email+"</p>";
+//      ans = ans +" <p>"+phone+"</p>";
+//       ans = ans +" <p>"+website+"</p>";
+//        ans = ans +" <p>"+city+"</p>";
+//         ans = ans +" <p>"+address+"</p>";
+//     ans = ans+" <a class=\"service-btn\" href=\"managebooking.jsp?email=\">Book now</a>";
+//                          ans = ans + "</div>";
+//                        ans = ans + "</div>";
+//                         ans = ans + "</div>";
+
+                        ans = ans + "<div class=\"col-md-6 col-lg-6 col-xs-12 d-flex align-items-stretch mb-5 mb-lg-0 data-aos='fade-up'\">";
+                        ans += "<div class=\"card\" style=\"width: 18rem;\">";
+                        ans += " <img src=" + photo + " class=\"card-img-top\" alt=\"...\">";
+                        ans += "<div class=\"card-body\">";
+                        ans += "<h5 class=\"card-title\">" + name + "</h5>";
+                        ans += "<p class=\"card-text\">" + email + "</p>";
+                        ans += "<p class=\"card-text\">" + phone + "</p>";
+                        ans += "<p class=\"card-text\">" + website + "</p>";
+                        ans += "<p class=\"card-text\">" + city + "</p>";
+                        ans += "<p class=\"card-text\">" + address + "</p>";
+                        ans = ans + " <button class='btn btn-primary my-3' onclick=\"managebookings('" + email + "')\">read more</button>&nbsp;";
+                        ans += "<button type=\"button\" class=\"btn btn-primary\" onclick=\"fetchreviews('" + email + "')\" data-toggle=\"modal\" data-target=\"#exampleModal\">Rate Service</button>";
+                        bt += "<button type=\"button\" class=\"btn btn-primary\" onclick=\"add('" + email + "')\">Submit</button>";
+                        ans += "</div>";
+                        ans += "</div>";
+                        ans += "</div>";
+
+                    }
+                    ans = ans + "<div class=\"col-md-6 col-sm-6 col-xs-12\"id=\"g\">";
+
+
+                    ans = ans + "</div>";
+
+
+                    //document.getElementById("d1").innerHTML = res;
+                    document.getElementById("sub").innerHTML = ans;
+                    document.getElementById("d1").innerHTML = name;
+                    document.getElementById("ans").innerHTML = bt;
+                    fetch_gallery();
+                }
+            };
+
+            xhttp.open("POST", "/fetchsinglevender", true);
+            xhttp.send(form);
+        }
+
+        function fetch_gallery() {
+            var email = localStorage.getItem("email");
+            var xhttp = new XMLHttpRequest();
+            var form = new FormData();
+            form.append("email", email);
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.response;
+                    console.log(res);
+
+                    var mainobj = JSON.parse(res);
+                    console.log(mainobj);
+
+                    var arr = mainobj["ans"];
+                    console.log(arr);
+
+                    var ans = "";
+                    ans = ans + "<div class=\"row\">";
+                    for (var i = 0; i < arr.length; i++) {
+
+                        ans = ans + "<div class=\"col-md-3 col-lg-3 col-xs-12 d-flex align-items-stretch mb-5 mb-lg-0 data-aos='fade-up'\">";
+                        ans += "<div class=\"card\" style=\"width: 18rem;\">";
+                        ans += " <img src=" + arr[i]["photo"] + " class=\"card-img-top\" alt=\"...\">";
+                        ans += "<div class=\"card-body\">";
+                        ans += "<h5 class=\"card-title\">" + arr[i]["galleryid"] + "</h5>";
+                        ans += "<p class=\"card-text\">" + arr[i]["caption"] + "</p>";
+                        ans += "</div>";
+                        ans += "</div>";
+                        ans += "</div>";
+                    }
+
+                    ans = ans + "</div>";
+                    //document.getElementById("d1").innerHTML = res;
+                    document.getElementById("g").innerHTML = ans;
+
+                }
+            };
+
+            xhttp.open("POST", "/fetchgallery", true);
+            xhttp.send(form);
+        }
+
+        function managebookings(email) {
+//                alert(email);
+            localStorage.setItem("email", email);
+            window.location.href = "/managebookings";
+        }
+
+        function add(email) {
+            var rate = 0;
+            var ele = document.getElementsByName('rate');
+
+            for (var i = 0; i < ele.length; i++) {
+                if (ele[i].checked)
+                    rate = ele[i].value;
+            }
+            var desc = document.getElementById("desc").value;
+            let picdata = new FormData();
+            picdata.append("email", email);
+            picdata.append("description", desc);
+            picdata.append("rate", rate);
+            let xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let resp = this.responseText.trim();
+                    alert(resp);
+                    if (resp === "Success") {
+                        fetchreviews(email);
+                    } else {
+                        alert("failed");
+                    }
+                }
+            };
+            xhr.open("POST", "/addrev", true);
+            xhr.send(picdata);
+        }
+    </script>
+
+</head>
+
+<body onload="fetch_venders()">
+
+<!-- Main header -->
+<header class="header">
+
+    <div class="header-top" data-animate="fadeInDown" data-delay=".5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header-info text-center text-md-left">
+                        <span>Door Step Services<a href="#">Get It Now</a></span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-5">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-header" data-animate="fadeInUp" data-delay=".9">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-9">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="/">
+                            <img src="/assets2/img/logo.png" data-rjs="2" alt="VPNet">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-8 col-md-5 col-sm-2 col-3">
+                    <nav>
+                        <!-- Header-menu -->
+                        <div class="header-menu">
+                            <ul>
+                                <li class="active"><a href="/user_home">Home</a></li>
+                                <li class=""><a href="/user_bookings">Bookings</a></li>
+                                <li class=""><a href="/">Logout</a></li>
+                            </ul>
+                        </div>
+                        <!-- End of Header-menu -->
+                    </nav>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 d-none d-sm-block">
+                    <!-- Header Call -->
+                    <div class="header-call text-right">
+                        <span>Call Now</span>
+                        <a href="tel:+1234567890">(+1) 234-567-8900</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End of Main header -->
+
+
+<section class="page-title-wrap" data-bg-img="img/hills.jpg" data-rjs="2">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="page-title" data-animate="fadeInUp">
+                    <h2>Vendors List</h2>
+                    <ul class="list-unstyled m-0 d-flex">
+                        <li><a href="user_home"><i class="fa fa-home"></i> Home</a></li>
+                        <li><a href="#">Vendors List</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<main id="main" class="my-3">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+
+            <div class="d-flex justify-content-between align-items-center" id="d1">
+                <h2>Inner Page</h2>
+
+            </div>
+
+        </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section class="inner-page">
+        <div class="container">
+            <div id="sub" class="row">
+                <p>
+                    Example inner page template
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+
+<footer class="main-footer">
+
+
+    <div class="bottom-footer dark-bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Copyright -->
+                <div class="col-md-6">
+                    <div class="copyright-text text-center text-md-left">
+                        <p class="mb-md-0">&copy; 2018 Serviney. All rights reserved.</p>
+                    </div>
+                </div>
+
+                <!-- Social Profiles -->
+                <div class="col-md-6">
+                    <ul class="social-profiles nav justify-content-center justify-content-md-end">
+                        <li><a href="#" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="fa fa-vimeo"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- The Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-12 col-md-12">
+
+                        <h3>Add Your Review</h3>
+                        <div class="rate">
+                            <input type="radio" id="star5" name="rate" value="5"/>
+                            <label for="star5" title="text">5 stars</label>
+                            <input type="radio" id="star4" name="rate" value="4"/>
+                            <label for="star4" title="text">4 stars</label>
+                            <input type="radio" id="star3" name="rate" value="3"/>
+                            <label for="star3" title="text">3 stars</label>
+                            <input type="radio" id="star2" name="rate" value="2"/>
+                            <label for="star2" title="text">2 stars</label>
+                            <input type="radio" id="star1" name="rate" value="1"/>
+                            <label for="star1" title="text">1 star</label>
+                        </div>
+                        <textarea class="form-control" id="desc" rows="5" cols="10"></textarea>
+                        <div id="ans"></div>
+                    </div>
+
+                    <div class="col-12 col-md-12" id="review">
+
+
+                        <h2>This vendor is very great</h2>
+                        <p>Thanks for this beautiful service.</p>
+                        <hr>
+
+                        <h2>This vendor is very great</h2>
+                        <p>Thanks for this beautiful service.</p>
+                        <hr>
+
+                        <h2>This vendor is very great</h2>
+                        <p>Thanks for this beautiful service.</p>
+                        <hr>
+
+                        <h2>This vendor is very great</h2>
+                        <p>Thanks for this beautiful service.</p>
+                        <hr>
+
+                        <h2>This vendor is very great</h2>
+                        <p>Thanks for this beautiful service.</p>
+                        <hr>
+
+                        <h2>This vendor is very great</h2>
+                        <p>Thanks for this beautiful service.</p>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Files -->
+<script src="/assets2/js/jquery-3.3.1.min.js"></script>
+<script src="/assets2/js/bootstrap.bundle.min.js"></script>
+<script src="/assets2/plugins/waypoints/jquery.waypoints.min.js"></script>
+<script src="/assets2/plugins/waypoints/sticky.min.js"></script>
+<script src="/assets2/plugins/swiper/swiper.min.js"></script>
+<script src="/assets2/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/assets2/plugins/parsley/parsley.min.js"></script>
+<script src="/assets2/plugins/color-switcher/color-switcher.js"></script>
+<script src="/assets2/plugins/retinajs/retina.min.js"></script>
+<script src="/assets2/plugins/isotope/isotope.pkgd.min.js"></script>
+<script src="/assets2/js/menu.min.js"></script>
+<script src="/assets2/js/scripts.js"></script>
+<script src="/assets2/js/custom.js"></script>
+
+
+
+<script>
+
+
+    function fetchreviews(email) {
+
+        alert(email);
+        var xhttp = new XMLHttpRequest();
+        var form = new FormData();
+        form.append("email", email);
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+
+                var mainobj = JSON.parse(res);
+                console.log(mainobj);
+
+                var arr = mainobj["ans"];
+                console.log(arr);
+
+                var ans = "";
+
+                for (var i = 0; i < arr.length; i++) {
+                    var rate = parseInt(arr[i]["rating"]);
+
+                    if (rate === 1) {
+                        ans += "<div class=\"rate\">";
+                        ans += "<input type=\"radio\" disabled id=\"star1\" name=\"rate\" value=\"1\" />";
+                        ans += "<label for=\"star1\" title=\"text\" style='color:#c59b08'>1 stars</label>";
+                        ans += "</div>";
+                    }
+                    if (rate === 2) {
+                        ans += "<div class=\"rate\">";
+                        ans += "<input type=\"radio\" disabled id=\"star1\" name=\"rate\" value=\"1\" />";
+                        ans += "<label for=\"star1\" title=\"text\" style='color:#c59b08'>1 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star2\" name=\"rate\" disabled value=\"2\" />";
+                        ans += "<label for=\"star2\" title=\"text\" style='color:#c59b08'>2 stars</label>";
+                        ans += "</div>";
+                    }
+                    if (rate === 3) {
+                        ans += "<div class=\"rate\">";
+                        ans += "<input type=\"radio\" disabled id=\"star1\" name=\"rate\" value=\"1\" />";
+                        ans += "<label for=\"star1\" title=\"text\" style='color:#c59b08'>1 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star2\" name=\"rate\" disabled value=\"2\" />";
+                        ans += "<label for=\"star2\" title=\"text\" style='color:#c59b08'>2 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star3\" name=\"rate\" disabled value=\"3\" />";
+                        ans += "<label for=\"star3\" title=\"text\" style='color:#c59b08'>3 stars</label>";
+                        ans += "</div>";
+                    }
+                    if (rate === 4) {
+                        ans += "<div class=\"rate\">";
+                        ans += "<input type=\"radio\" id=\"star1\" disabled name=\"rate\" value=\"1\" />";
+                        ans += "<label for=\"star1\" title=\"text\" style='color:#c59b08'>1 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star2\" name=\"rate\" disabled value=\"2\" />";
+                        ans += "<label for=\"star2\" title=\"text\" style='color:#c59b08'>2 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star3\" name=\"rate\" disabled value=\"3\" />";
+                        ans += "<label for=\"star3\" title=\"text\" style='color:#c59b08'>3 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star4\" name=\"rate\" disabled value=\"4\" />";
+                        ans += "<label for=\"star4\" title=\"text\" style='color:#c59b08'>4 stars</label>";
+                        ans += "</div>";
+                    }
+                    if (rate === 5) {
+                        ans += "<div class=\"rate\">";
+                        ans += "<input type=\"radio\" id=\"star1\" disabled name=\"rate\" value=\"1\" />";
+                        ans += "<label for=\"star1\" title=\"text\" style='color:#c59b08'>1 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star2\" name=\"rate\" disabled value=\"2\" />";
+                        ans += "<label for=\"star2\" title=\"text\" style='color:#c59b08'>2 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star3\" name=\"rate\" disabled value=\"3\" />";
+                        ans += "<label for=\"star3\" title=\"text\" style='color:#c59b08'>3 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star4\" name=\"rate\" disabled value=\"4\" />";
+                        ans += "<label for=\"star4\" title=\"text\" style='color:#c59b08'>4 stars</label>";
+                        ans += "<input type=\"radio\" id=\"star5\" disabled name=\"rate\" value=\"5\" />";
+                        ans += "<label for=\"star5\" title=\"text\" style='color:#c59b08'>5 stars</label>";
+                        ans += "</div>";
+                    }
+
+
+                    ans += "<h2>" + arr[i]["suggestions"] + "</h2>";
+                }
+
+
+                //document.getElementById("d1").innerHTML = res;
+                document.getElementById("review").innerHTML = ans;
+            }
+        };
+
+        xhttp.open("POST", "/fetchreviews", true);
+        xhttp.send(form);
+    }
+</script>
+</body>
+
+</html>
